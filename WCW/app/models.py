@@ -17,6 +17,7 @@ class Reader (db.Model):
 class Book (db.Model):
     id = db.Column(db.Integer,primary_key=True)
     title = db.Column(db.String(250), index=True)
+    description = db.Column(db.String(5000), index=True)
     reader = db.relationship('Reader',secondary=readship)
     def __repr__(self):
         return  self.title

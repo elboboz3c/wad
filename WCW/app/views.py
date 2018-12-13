@@ -1,7 +1,7 @@
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, flash, session
 from app import app, db, models
 from .models import Reader, Book
-from .forms import ReaderForm
+from .forms import ReaderForm, BookForm
 import datetime
 
 
@@ -22,9 +22,10 @@ def login(): #filter out all uncompleted tasks and display
         tmp = Reader(name=form.name.data,password=form.password.data)
         rdr = Reader.query.filter_by(name=tmp.name).first()
         if (tmp.password==rdr.password):
-            return redirect('/register')
+            session['active_user'] = form.name.data
+            return redirect('/library')
         else:
-            return redirect('/login')
+            flash("Wrong information!")
     return render_template('login.html',
                         title="Sign in",form=form)
 
@@ -35,30 +36,52 @@ def register(): #filter out all uncompleted tasks and display
         tmp = models.Reader(name=form.name.data,password=form.password.data)
         db.session.add(tmp)
         db.session.commit()
-        return redirect('/login') #display due tasks after user communityd a new task
+        return redirect('/login')
     return render_template('register.html',
                         title="Sign up",form=form)
 
-@app.route('/resource')
-def resource(): #filter out all completed tasks and display
-    task = models.Task.query.filter_by(completed=True).all()
-    return render_template('/resource.html',
-                       task=task)
-
-@app.route('/community', methods=['GET', 'POST'])
-def community():
-    task = models.Task.query.filter_by(completed=False).all()
-    form = ReaderForm()
+@app.route('/library',methods=['GET','POST'])
+def library():
+    form = BookForm()
     if form.validate_on_submit():
-        tmp = models.Task(title=form.title.data,description=form.description.data)
+        tmp = Book(title=form.title.data,description=form.description.data)
         db.session.add(tmp)
         db.session.commit()
-        return redirect(url_for('.login')) #display due tasks after user communityd a new task
-    return render_template('login.html',form=form,task=task)
+        return redirect('/library')
+    books = Book.query.all()
+    return render_template('library.html',books=books,form=form)
 
-@app.route('/toComplete/<temp>') #agent route for tagging tasks as completed
-def toComplete(temp):
-    tmp = models.Task.query.get(temp)
-    tmp.completed = 1
-    db.session.commit()
-    return redirect(url_for('.login')) #display completed tasks after user tagged a task as completed
+@app.route('/repo',methods=['GET','POST'])
+def repo():
+    form = ReadForm()
+    if form.validate_on_submit():
+        tmp = Book(password=form.password.data)
+        rdr = Reader.query.filter_by(name=session['active_user']).first()
+        rdr.password = tmp.password
+        db.session.commit()
+        return redirect('/library')
+    books = Book.query.all()
+    return render_template('repo.html',books=books,form=form)
+
+@app.route('/logout')
+def logout():
+	session.pop('variable', None)
+	return redirect('/login')
+
+# @app.route('/community', methods=['GET', 'POST'])
+# def community():
+#     task = models.Task.query.filter_by(completed=False).all()
+#     form = ReaderForm()
+#     if form.validate_on_submit():
+#         tmp = models.Task(title=form.title.data,description=form.description.data)
+#         db.session.add(tmp)
+#         db.session.commit()
+#         return redirect(url_for('.login')) #display due tasks after user communityd a new task
+#     return render_template('login.html',form=form,task=task)
+
+# @app.route('/toComplete/<temp>') #agent route for tagging tasks as completed
+# def toComplete(temp):
+#     tmp = models.Task.query.get(temp)
+#     tmp.completed = 1
+#     db.session.commit()
+#     return redirect(url_for('.login')) #display completed tasks after user tagged a task as completed
