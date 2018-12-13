@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <br><h2>Introducing Cora</h2>
+  <h4>Your personal virtual mentor</h4><br>
+  <div class="card">
+    <!-- <div class="card-body">Cora: How's it going?</div> -->
+    <div class="card-header">
+    Talk to Cora
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">  Cora: How's it going?</h5>
+    <input type="text" class="form-control" style="margin-top: 20px;" placeholder="Tell me how you are feeling..."><br>
+    <a href="#" class="btn btn-primary">Reply</a>
+  </div>
+    <!--
+    <div class="card-footer">
+      <a class="btn btn-sm btn-outline-dark" role="button">Send</a>
+      </div> -->
+    </div> <!--access the agent route, and pass the task id-->
+  </div><br>
+  <div class="container">
+    <br><h4>Or you can take an assessment to evaluate your mental status</h4><br>
+    <a class="btn btn-sm btn-outline-dark" role="button">Start now</a>
+{% endblock %}

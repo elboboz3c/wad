@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sign in</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../static/bootstrap.min.css"> <!--bootstrap css file -->
+</head>
+ <!-- <div class="container">
+   <br><h2>Connect to the community</h2><br>
+   {% for p in task %}
+   <div class="card">
+     <div class="card-header">{{ p.title }} posted:</div>
+     <div class="card-body">{{ p.description }}</div>
+     <div class="card-footer">
+       <a href="{{url_for('toComplete', temp=p.id)}}" class="btn btn-outline-dark" role="button">Like</a>
+       <a href="{{url_for('toComplete', temp=p.id)}}" class="btn btn-outline-dark" role="button">Reply</a>
+     </div>
+   </div><br>
+   {% endfor %}
+ </div> -->
+ <div class="container">
+    <br><h2>The portal</h2><br>
+   <form action="" method="post" name="create">
+     {{ form.hidden_tag() }} <!--Preventing CSRF -->
+     <div class="form-group">
+       <label for="usr">User name:</label><br>
+       {{ form.title(class="form-control")}}
+     </div>
+     <div class="form-group">
+       <label for="pwd">Password:</label><br>
+       {{ form.description(class="form-control")}}
+     </div>
+     <p><input type="submit" class="btn btn-dark" value="Login"></p>
+   </form>
+ </div>

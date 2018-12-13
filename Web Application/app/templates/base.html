@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>A to-do list web app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../static/bootstrap.min.css"> <!--bootstrap css file -->
+</head>
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('.cora')}}">Cora</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('.resource')}}">Resources</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('.community')}}">Forum</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Navigation bar is the same for all pages, so it is implemented in the base template -->
+
+<div>
+  {% block content %}{% endblock %} <!--contents that are different -->
+</div>
+
+</body>
+</html>
