@@ -1,5 +1,6 @@
 from flask import render_template, url_for, redirect
 from app import app, db, models
+from .models import Reader, Book
 from .forms import ReaderForm
 import datetime
 
@@ -18,10 +19,12 @@ def homepage():
 def login(): #filter out all uncompleted tasks and display
     form = ReaderForm()
     if form.validate_on_submit():
-        tmp = models.Reader(name=form.name.data,password=form.password.data)
-        db.session.add(tmp)
-        db.session.commit()
-        return redirect('/login') #display due tasks after user communityd a new task
+        tmp = Reader(name=form.name.data,password=form.password.data)
+        rdr = Reader.query.filter_by(name=tmp.name).first()
+        if (tmp.password==rdr.password):
+            return redirect('/register')
+        else:
+            return redirect('/login')
     return render_template('login.html',
                         title="Sign in",form=form)
 
