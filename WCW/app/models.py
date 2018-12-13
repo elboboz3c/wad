@@ -1,9 +1,22 @@
 from app import db
 import datetime
 
-class Task(db.Model):
+readship = db.Table('readship', db.Model.metadata,
+    db.Column('readerId', db.Integer, db.ForeignKey('reader.id')),
+    db.Column('bookId', db.Integer, db.ForeignKey('book.id'))
+)
+
+class Reader (db.Model):
     id = db.Column(db.Integer, primary_key=True) #id is not presented to the user, but is used to identify tasks at the backend
-    title = db.Column(db.String(500))
-    description = db.Column(db.String(1000))
-    date = db.Column(db.DateTime,default=datetime.datetime.utcnow()) #store the date automatically
-    completed = db.Column(db.Boolean,default=False) #tag that indicates whether a task is completed
+    name = db.Column(db.String(250), index=True)
+    password = db.Column(db.String(250),index=True)
+    book = db.relationship('Book',secondary=readship)
+    def __repr__(self):
+        return  self.name
+
+class Book (db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String(250), index=True)
+    reader = db.relationship('Reader',secondary=readship)
+    def __repr__(self):
+        return  self.title

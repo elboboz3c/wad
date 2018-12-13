@@ -1,7 +1,8 @@
 from flask_wtf import Form
-from wtforms import TextField, PasswordField
+from wtforms import StringField, PasswordField
 from wtforms import validators
+from wtforms.validators import DataRequired
 
-class CreateForm(Form):
-    title = TextField('Title', [validators.required(), validators.length(max=50)])
-    description = PasswordField('Description', [validators.optional(), validators.length(max=200)])
+class ReaderForm(Form):
+    name = StringField('name', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired()])
