@@ -22,3 +22,27 @@
 2018-12-14 13:58:24,187 - INFO - views.py - views - list - 93 - changed password
 2018-12-14 13:58:24,207 - INFO - views.py - views - list - 98 - entered personal list
 2018-12-14 13:58:29,657 - INFO - views.py - views - logout - 123 - logged out
+2018-12-14 14:18:19,819 - INFO - views.py - views - login - 34 - user logged in
+2018-12-14 14:18:19,829 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:18:26,141 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 14:18:29,203 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:18:31,666 - INFO - views.py - views - finish - 117 - added a book to list
+2018-12-14 14:18:31,680 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:18:33,014 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 14:21:53,009 - INFO - views.py - views - list - 81 - added a book
+2018-12-14 14:21:53,027 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 14:21:56,092 - INFO - views.py - views - logout - 123 - logged out
+2018-12-14 14:22:00,275 - INFO - views.py - views - login - 34 - user logged in
+2018-12-14 14:22:00,291 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:22:24,083 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 14:22:33,013 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:22:36,489 - INFO - views.py - views - logout - 123 - logged out
+2018-12-14 14:22:40,633 - INFO - views.py - views - login - 34 - user logged in
+2018-12-14 14:22:40,650 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:22:42,100 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 14:22:48,673 - INFO - views.py - views - logout - 123 - logged out
+2018-12-14 14:22:52,244 - INFO - views.py - views - login - 34 - user logged in
+2018-12-14 14:22:52,259 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:23:02,146 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 14:23:12,687 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:23:16,530 - INFO - views.py - views - list - 98 - entered personal list
