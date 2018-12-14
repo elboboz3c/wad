@@ -1,5 +1,7 @@
 import os
 import unittest
+from app import app
+app.testing = True
 
 def add(x,y):
     return x + y

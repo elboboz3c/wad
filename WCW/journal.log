@@ -46,3 +46,9 @@
 2018-12-14 14:23:02,146 - INFO - views.py - views - list - 98 - entered personal list
 2018-12-14 14:23:12,687 - INFO - views.py - views - library - 67 - entered library
 2018-12-14 14:23:16,530 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 14:55:52,673 - INFO - views.py - views - logout - 123 - logged out
+2018-12-14 14:55:58,004 - INFO - views.py - views - login - 34 - user logged in
+2018-12-14 14:55:58,017 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:55:59,251 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 14:55:59,773 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 14:56:00,246 - INFO - views.py - views - list - 98 - entered personal list
