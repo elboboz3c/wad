@@ -21,11 +21,11 @@ def login(): #filter out all uncompleted tasks and display
     if form.validate_on_submit():
         tmp = Reader(name=form.name.data,password=form.password.data)
         rdr = Reader.query.filter_by(name=tmp.name).first()
-        if (tmp.password==rdr.password):
+        if (rdr is not None and tmp.password==rdr.password):
             session['active_user'] = form.name.data
             return redirect('/library')
         else:
-            flash("Wrong information!")
+            flash("Wrong user name or password!")
     return render_template('login.html',
                         title="Sign in",form=form)
 
@@ -42,31 +42,36 @@ def register(): #filter out all uncompleted tasks and display
 
 @app.route('/library',methods=['GET','POST'])
 def library():
-    form = BookForm()
-    if form.validate_on_submit():
-        tmp = Book(title=form.title.data,description=form.description.data)
-        db.session.add(tmp)
-        db.session.commit()
-        return redirect('/library')
+
     rdr = Reader.query.filter_by(name=session['active_user']).first()
     read_books = rdr.book
     books = Book.query.all()
     for book in read_books:
         books.remove(book)
-    return render_template('library.html',books=books,form=form)
+    return render_template('library.html',title="Book Library",books=books)
 
 @app.route('/repo',methods=['GET','POST'])
 def repo():
-    form = ReaderForm()
-    if form.validate_on_submit():
+    book_form = BookForm()
+    if book_form.validate_on_submit():
+        tmp = Book(title=book_form.title.data,description=book_form.description.data)
+        rdr = Reader.query.filter_by(name=session['active_user']).first()
+        tmp.reader.append(rdr)
+        db.session.add(tmp)
+        db.session.commit()
+        flash("Successfully added a book to your list!")
+        return redirect('/repo')
+    password_form = ReaderForm()
+    if password_form.validate_on_submit():
         # tmp = Reader(password=form.password.data)
         rdr = Reader.query.filter_by(name=session['active_user']).first()
-        rdr.password = form.password.data
+        rdr.password = password_form.password.data
         db.session.commit()
-        return redirect('/library')
+        flash("Successfully changed password!")
+        return redirect('/repo')
     rdr = Reader.query.filter_by(name=session['active_user']).first()
     books = rdr.book
-    return render_template('repo.html',books=books,form=form)
+    return render_template('repo.html',title="Personal repository",books=books,book_form=book_form,password_form=password_form)
 
 @app.route('/unfinish/<id>') #agent route for tagging tasks as completed
 def unfinish(id):
@@ -74,7 +79,8 @@ def unfinish(id):
     tmp = Book.query.get(id)
     rdr.book.remove(tmp)
     db.session.commit()
-    return redirect('/library') #display completed tasks after user tagged a task as completed
+    flash("Successfully deleted a book from your list!")
+    return redirect('/repo') #display completed tasks after user tagged a task as completed
 
 @app.route('/finish/<id>') #agent route for tagging tasks as completed
 def finish(id):

@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="/repo">Repo</a>
+      <a class="nav-link active" href="/repo">Repo</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/library">Library</a>
@@ -13,33 +13,51 @@
     <li class="nav-item">
       <a class="nav-link" href="/logout">Log off</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link">Logged in as: {{session['active_user']}}</a>
+    </li>
   </ul>
 </nav>
-
-<br><h2>Logged in as: {{session['active_user']}}</h2><br>
+<br><br>
 {% for book in books %}
+
 <div class="container">
 
   <div class="card">
     <div class="card-header">{{book.title}}</div>
     <div class="card-body">{{book.description}}</div>
     <div class="card-footer">
-      <a href="/unfinish/{{book.id}}" class="btn btn-outline-dark" role="button">Oops, I haven't finished yet.</a>
+      <a href="/unfinish/{{book.id}}" class="btn btn-outline-dark" role="button">Delete from my book list</a>
     </div>
   </div><br>
 </div>
 {% endfor %}
 <div class="container">
+<br><h2>Add a book you've read</h2><br>
+<form action="" method="post" name="create">
+  {{ book_form.hidden_tag() }} <!--Preventing CSRF -->
+  <div class="form-group">
+    <label for="title">Book title:</label><br>
+    {{ book_form.title(class="form-control")}}
+  </div>
+  <div class="form-group">
+    <label for="pwd">Say something about this book:</label><br>
+    {{ book_form.description(class="form-control")}}
+  </div>
+  <p><input type="submit" class="btn btn-dark" value="Submit"></p>
+</form>
+</div>
+<div class="container">
 <br><h2>Change your personal PIN</h2><br>
 <form action="" method="post" name="create">
-  {{ form.hidden_tag() }} <!--Preventing CSRF -->
+  {{ password_form.hidden_tag() }} <!--Preventing CSRF -->
   <div class="form-group"  style="display: none;">
     <label for="pwd">Your username:</label><br>
-    {{ form.name(class="form-control", value=session['active_user'])}}
+    {{ password_form.name(class="form-control", value=session['active_user'])}}
   </div>
   <div class="form-group">
     <label for="pwd">Your new PIN:</label><br>
-    {{ form.password(class="form-control")}}
+    {{ password_form.password(class="form-control")}}
   </div>
   <p><input type="submit" class="btn btn-dark" value="Submit"></p>
 </form>

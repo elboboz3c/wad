@@ -17,6 +17,19 @@
     </style>
   </head>
 
+  {% with messages = get_flashed_messages() %}
+          {% if messages %}
+
+            {% for message in messages %}
+            <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  {{ message }}
+            </div>
+            {% endfor %}
+
+          {% endif %}
+          {% endwith %}
+
 
 <div>
   {% block content %}{% endblock %} <!--contents that are different -->

@@ -8,14 +8,17 @@
       <a class="nav-link" href="/repo">Repo</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/library">Library</a>
+      <a class="nav-link active" href="/library">Library</a>
+    </li>
+    <li class="nav-item justify-content-end">
+      <a class="nav-link" href="/logout">Log off</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/logout">Log off</a>
+      <a class="nav-link">Logged in as: {{session['active_user']}}</a>
     </li>
   </ul>
 </nav>
-<br><h2>Logged in as: {{session['active_user']}}</h2><br>
+<br><br>
 {% for book in books %}
 <div class="container">
 
@@ -28,19 +31,5 @@
   </div><br>
 </div>
 {% endfor %}
-<div class="container">
-<br><h2>Add a book you've read</h2><br>
-<form action="" method="post" name="create">
-  {{ form.hidden_tag() }} <!--Preventing CSRF -->
-  <div class="form-group">
-    <label for="title">Book title:</label><br>
-    {{ form.title(class="form-control")}}
-  </div>
-  <div class="form-group">
-    <label for="pwd">Say something about this book:</label><br>
-    {{ form.description(class="form-control")}}
-  </div>
-  <p><input type="submit" class="btn btn-dark" value="Submit"></p>
-</form>
-</div>
+
 {% endblock %}
