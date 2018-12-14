@@ -15,6 +15,7 @@
     </li>
   </ul>
 </nav>
+
 <br><h2>Logged in as: {{session['active_user']}}</h2><br>
 {% for book in books %}
 <div class="container">
@@ -23,21 +24,18 @@
     <div class="card-header">{{book.title}}</div>
     <div class="card-body">{{book.description}}</div>
     <div class="card-footer">
-      <a href="/finish/book.title" class="btn btn-outline-dark" role="button">Already read</a>
+      <!-- <a href="{{url_for('toComplete', temp=p.id)}}" class="btn btn-outline-dark" role="button">Complete</a> -->
+      <a href="/unfinish/book.title" class="btn btn-outline-dark" role="button">Oops, I haven't finished yet.</a>
     </div>
   </div><br>
 </div>
 {% endfor %}
 <div class="container">
-<br><h2>Add a book you've read</h2><br>
+<br><h2>Change your personal PIN</h2><br>
 <form action="" method="post" name="create">
   {{ form.hidden_tag() }} <!--Preventing CSRF -->
   <div class="form-group">
-    <label for="title">Book title:</label><br>
-    {{ form.title(class="form-control")}}
-  </div>
-  <div class="form-group">
-    <label for="pwd">Say something about this book:</label><br>
+    <label for="pwd">Your new PIN:</label><br>
     {{ form.description(class="form-control")}}
   </div>
   <p><input type="submit" class="btn btn-dark" value="Submit"></p>

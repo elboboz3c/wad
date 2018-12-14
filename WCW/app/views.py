@@ -48,25 +48,42 @@ def library():
         db.session.add(tmp)
         db.session.commit()
         return redirect('/library')
-    books = Book.query.all()
+    books = Book.query.filter_by(Book.reader.contains(session['active_user'])).all()
     return render_template('library.html',books=books,form=form)
 
 @app.route('/repo',methods=['GET','POST'])
 def repo():
-    form = ReadForm()
+    form = ReaderForm()
     if form.validate_on_submit():
         tmp = Book(password=form.password.data)
         rdr = Reader.query.filter_by(name=session['active_user']).first()
         rdr.password = tmp.password
         db.session.commit()
         return redirect('/library')
-    books = Book.query.all()
+    books = Book.query.filter_by(Book.reader.contains(session['active_user'])).all()
     return render_template('repo.html',books=books,form=form)
 
 @app.route('/logout')
 def logout():
 	session.pop('variable', None)
 	return redirect('/login')
+
+@app.route('/unfinish/<temp>') #agent route for tagging tasks as completed
+def unfinish(temp):
+    rdr = Reader.query.filter_by(name=session['active_user']).first()
+    tmp = Book.query.filter_by(title=temp).first()
+    rdr.book.remove(tmp)
+    db.session.commit()
+    return redirect(url_for('.login')) #display completed tasks after user tagged a task as completed
+
+@app.route('/finish/<temp>') #agent route for tagging tasks as completed
+def finish(temp):
+    rdr = Reader.query.filter_by(name=session['active_user']).first()
+    tmp = Book.query.filter_by(title=temp).first()
+    rdr.book.append(tmp)
+    db.session.commit()
+    return redirect(url_for('.login')) #display completed tasks after user tagged a task as completed
+
 
 # @app.route('/community', methods=['GET', 'POST'])
 # def community():
@@ -78,10 +95,3 @@ def logout():
 #         db.session.commit()
 #         return redirect(url_for('.login')) #display due tasks after user communityd a new task
 #     return render_template('login.html',form=form,task=task)
-
-# @app.route('/toComplete/<temp>') #agent route for tagging tasks as completed
-# def toComplete(temp):
-#     tmp = models.Task.query.get(temp)
-#     tmp.completed = 1
-#     db.session.commit()
-#     return redirect(url_for('.login')) #display completed tasks after user tagged a task as completed
