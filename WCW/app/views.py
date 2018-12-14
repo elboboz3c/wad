@@ -48,15 +48,18 @@ def library():
         db.session.add(tmp)
         db.session.commit()
         return redirect('/library')
-    # rdr = Reader.query.filter_by(name=session['active_user']).first()
-    books = Book.query.all();
+    rdr = Reader.query.filter_by(name=session['active_user']).first()
+    read_books = rdr.book
+    books = Book.query.all()
+    for book in read_books:
+        books.remove(book)
     return render_template('library.html',books=books,form=form)
 
 @app.route('/repo',methods=['GET','POST'])
 def repo():
     form = ReaderForm()
     if form.validate_on_submit():
-        tmp = Book(password=form.password.data)
+        tmp = Reader(password=form.password.data)
         rdr = Reader.query.filter_by(name=session['active_user']).first()
         rdr.password = tmp.password
         db.session.commit()
@@ -64,11 +67,6 @@ def repo():
     rdr = Reader.query.filter_by(name=session['active_user']).first()
     books = rdr.book
     return render_template('repo.html',books=books,form=form)
-
-@app.route('/logout')
-def logout():
-	session.pop('variable', None)
-	return redirect('/login')
 
 @app.route('/unfinish/<id>') #agent route for tagging tasks as completed
 def unfinish(id):
@@ -86,6 +84,10 @@ def finish(id):
     db.session.commit()
     return redirect('/repo') #display completed tasks after user tagged a task as completed
 
+@app.route('/logout')
+def logout():
+	session.pop('variable', None)
+	return redirect('/login')
 
 # @app.route('/community', methods=['GET', 'POST'])
 # def community():
