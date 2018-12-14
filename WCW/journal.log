@@ -1,0 +1,24 @@
+2018-12-14 13:53:40,052 - INFO - views.py - views - login - 34 - user logged in
+2018-12-14 13:53:40,064 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 13:53:42,435 - INFO - views.py - views - finish - 117 - added a book to list
+2018-12-14 13:53:42,454 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 13:53:43,848 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 13:53:45,111 - INFO - views.py - views - unfinish - 107 - deleted a book from list
+2018-12-14 13:53:45,125 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 13:54:46,709 - INFO - views.py - views - list - 81 - added a book
+2018-12-14 13:54:46,723 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 13:54:49,696 - INFO - views.py - views - unfinish - 107 - deleted a book from list
+2018-12-14 13:54:49,716 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 13:54:57,870 - INFO - views.py - views - list - 93 - changed password
+2018-12-14 13:54:57,886 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 13:57:28,646 - WARNING - views.py - views - login - 37 - wrong login detail
+2018-12-14 13:57:48,901 - INFO - views.py - views - login - 34 - user logged in
+2018-12-14 13:57:48,921 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 13:57:50,477 - INFO - views.py - views - logout - 123 - logged out
+2018-12-14 13:58:12,696 - WARNING - views.py - views - login - 37 - wrong login detail
+2018-12-14 13:58:17,710 - INFO - views.py - views - login - 34 - user logged in
+2018-12-14 13:58:17,728 - INFO - views.py - views - library - 67 - entered library
+2018-12-14 13:58:19,512 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 13:58:24,187 - INFO - views.py - views - list - 93 - changed password
+2018-12-14 13:58:24,207 - INFO - views.py - views - list - 98 - entered personal list
+2018-12-14 13:58:29,657 - INFO - views.py - views - logout - 123 - logged out
