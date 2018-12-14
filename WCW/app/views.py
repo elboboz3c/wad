@@ -59,9 +59,9 @@ def library():
 def repo():
     form = ReaderForm()
     if form.validate_on_submit():
-        tmp = Reader(password=form.password.data)
+        # tmp = Reader(password=form.password.data)
         rdr = Reader.query.filter_by(name=session['active_user']).first()
-        rdr.password = tmp.password
+        rdr.password = form.password.data
         db.session.commit()
         return redirect('/library')
     rdr = Reader.query.filter_by(name=session['active_user']).first()

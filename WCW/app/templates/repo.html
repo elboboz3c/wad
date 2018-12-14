@@ -33,6 +33,10 @@
 <br><h2>Change your personal PIN</h2><br>
 <form action="" method="post" name="create">
   {{ form.hidden_tag() }} <!--Preventing CSRF -->
+  <div class="form-group"  style="display: none;">
+    <label for="pwd">Your username:</label><br>
+    {{ form.name(class="form-control", value=session['active_user'])}}
+  </div>
   <div class="form-group">
     <label for="pwd">Your new PIN:</label><br>
     {{ form.password(class="form-control")}}
