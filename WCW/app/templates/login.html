@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='style.css')}}">
 
 
 <div class="container center">
 
-  <br><br><br><h2>The portal</h2><br>
+  <br><br><br><h2>The Portal</h2><br>
 
   <form action="" method="post" name="create">
     {{ form.hidden_tag() }} <!--Preventing CSRF -->

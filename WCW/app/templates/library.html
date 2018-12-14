@@ -19,7 +19,7 @@
   </ul>
 </nav>
 <br><br>
-<div class="container center">
+<div class="container">
   {% if books %}
   <h3>Books you might also be interested in</h3><br>
   {% else %}
@@ -30,7 +30,7 @@
 
 
   <div class="card">
-    <div class="card-header"><b>{{book.title}}</b>    <i>   &nbsp  this book is also read by {{book.reader|length}} other users</i></div>
+    <div class="card-header"><b>{{book.title}}</b>    <i>   &nbsp  this book is also being read by {{book.reader|length}} other user(s)</i></div>
     <div class="card-body">{{book.description}}</div>
     <div class="card-footer">
       <a href="/finish/{{book.id}}" class="btn btn-outline-dark" role="button">Already read</a>

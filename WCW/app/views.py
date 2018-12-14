@@ -5,6 +5,7 @@ from .forms import ReaderForm, BookForm
 import datetime
 
 
+
 @app.route("/")
 def homepage():
     # form = ReaderForm()
@@ -34,15 +35,19 @@ def register(): #filter out all uncompleted tasks and display
     form = ReaderForm()
     if form.validate_on_submit():
         tmp = models.Reader(name=form.name.data,password=form.password.data)
-        db.session.add(tmp)
-        db.session.commit()
-        return redirect('/login')
+        user_existence = Reader.query.filter_by(name=tmp.name).first()
+        if user_existence is None:
+            db.session.add(tmp)
+            db.session.commit()
+            flash("Successfully created a new account, please log in!")
+            return redirect('/login')
+        else:
+            flash("User already exists!")
     return render_template('register.html',
                         title="Sign up",form=form)
 
 @app.route('/library',methods=['GET','POST'])
 def library():
-
     rdr = Reader.query.filter_by(name=session['active_user']).first()
     read_books = rdr.book
     books = Book.query.all()
@@ -55,12 +60,16 @@ def repo():
     book_form = BookForm()
     if book_form.validate_on_submit():
         tmp = Book(title=book_form.title.data,description=book_form.description.data)
-        rdr = Reader.query.filter_by(name=session['active_user']).first()
-        tmp.reader.append(rdr)
-        db.session.add(tmp)
-        db.session.commit()
-        flash("Successfully added a book to your list!")
-        return redirect('/repo')
+        book_existence = Book.query.filter_by(title=tmp.title).first()
+        if book_existence is None:
+            rdr = Reader.query.filter_by(name=session['active_user']).first()
+            tmp.reader.append(rdr)
+            db.session.add(tmp)
+            db.session.commit()
+            flash("Successfully added a book to your list!")
+            return redirect('/repo')
+        else:
+            flash("Book already exists!")
     password_form = ReaderForm()
     if password_form.validate_on_submit():
         # tmp = Reader(password=form.password.data)

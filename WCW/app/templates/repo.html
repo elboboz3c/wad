@@ -32,7 +32,7 @@
 
 
   <div class="card">
-    <div class="card-header"><b>{{book.title}}</b>    <i>   &nbsp  this book is also read by {{book.reader|length}} other users</i></div>
+    <div class="card-header"><b>{{book.title}}</b>    <i>   &nbsp  this book is being read by {{book.reader|length - 1}} other user(s)</i></div>
     <div class="card-body">{{book.description}}</div>
     <div class="card-footer">
       <a href="/unfinish/{{book.id}}" class="btn btn-outline-dark" role="button">Delete from my book list</a>

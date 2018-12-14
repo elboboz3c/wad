@@ -1,33 +1,33 @@
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}"/> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    {% if title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>Book record application</title>
-    {% endif %}
+  {% if title %}
+  <title>{{ title }}</title>
+  {% else %}
+  <title>Book record application</title>
+  {% endif %}
 
-  </head>
+</head>
 
-  {% with messages = get_flashed_messages() %}
-          {% if messages %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
 
-            {% for message in messages %}
-            <div class="alert alert-warning">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  {{ message }}
-            </div>
-            {% endfor %}
+{% for message in messages %}
+<div class="alert alert-warning">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{ message }}
+</div>
+{% endfor %}
 
-          {% endif %}
-          {% endwith %}
+{% endif %}
+{% endwith %}
 
 
 <div>

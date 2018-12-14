@@ -8,7 +8,7 @@ readship = db.Table('readship', db.Model.metadata,
 
 class Reader (db.Model):
     id = db.Column(db.Integer, primary_key=True) #id is not presented to the user, but is used to identify tasks at the backend
-    name = db.Column(db.String(250), index=True)
+    name = db.Column(db.String(250), index=True,unique=True)
     password = db.Column(db.String(250),index=True)
     book = db.relationship('Book',secondary=readship)
     def __repr__(self):
@@ -16,7 +16,7 @@ class Reader (db.Model):
 
 class Book (db.Model):
     id = db.Column(db.Integer,primary_key=True)
-    title = db.Column(db.String(250), index=True)
+    title = db.Column(db.String(250), index=True,unique=True)
     description = db.Column(db.String(5000), index=True)
     reader = db.relationship('Reader',secondary=readship)
     def __repr__(self):
