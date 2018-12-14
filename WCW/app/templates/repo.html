@@ -24,8 +24,7 @@
     <div class="card-header">{{book.title}}</div>
     <div class="card-body">{{book.description}}</div>
     <div class="card-footer">
-      <!-- <a href="{{url_for('toComplete', temp=p.id)}}" class="btn btn-outline-dark" role="button">Complete</a> -->
-      <a href="/unfinish/book.title" class="btn btn-outline-dark" role="button">Oops, I haven't finished yet.</a>
+      <a href="/unfinish/{{book.id}}" class="btn btn-outline-dark" role="button">Oops, I haven't finished yet.</a>
     </div>
   </div><br>
 </div>
@@ -36,7 +35,7 @@
   {{ form.hidden_tag() }} <!--Preventing CSRF -->
   <div class="form-group">
     <label for="pwd">Your new PIN:</label><br>
-    {{ form.description(class="form-control")}}
+    {{ form.password(class="form-control")}}
   </div>
   <p><input type="submit" class="btn btn-dark" value="Submit"></p>
 </form>

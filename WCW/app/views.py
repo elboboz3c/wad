@@ -48,7 +48,8 @@ def library():
         db.session.add(tmp)
         db.session.commit()
         return redirect('/library')
-    books = Book.query.filter_by(Book.reader.contains(session['active_user'])).all()
+    # rdr = Reader.query.filter_by(name=session['active_user']).first()
+    books = Book.query.all();
     return render_template('library.html',books=books,form=form)
 
 @app.route('/repo',methods=['GET','POST'])
@@ -60,7 +61,8 @@ def repo():
         rdr.password = tmp.password
         db.session.commit()
         return redirect('/library')
-    books = Book.query.filter_by(Book.reader.contains(session['active_user'])).all()
+    rdr = Reader.query.filter_by(name=session['active_user']).first()
+    books = rdr.book
     return render_template('repo.html',books=books,form=form)
 
 @app.route('/logout')
@@ -68,21 +70,21 @@ def logout():
 	session.pop('variable', None)
 	return redirect('/login')
 
-@app.route('/unfinish/<temp>') #agent route for tagging tasks as completed
-def unfinish(temp):
+@app.route('/unfinish/<id>') #agent route for tagging tasks as completed
+def unfinish(id):
     rdr = Reader.query.filter_by(name=session['active_user']).first()
-    tmp = Book.query.filter_by(title=temp).first()
+    tmp = Book.query.get(id)
     rdr.book.remove(tmp)
     db.session.commit()
-    return redirect(url_for('.login')) #display completed tasks after user tagged a task as completed
+    return redirect('/library') #display completed tasks after user tagged a task as completed
 
-@app.route('/finish/<temp>') #agent route for tagging tasks as completed
-def finish(temp):
+@app.route('/finish/<id>') #agent route for tagging tasks as completed
+def finish(id):
     rdr = Reader.query.filter_by(name=session['active_user']).first()
-    tmp = Book.query.filter_by(title=temp).first()
+    tmp = Book.query.get(id)
     rdr.book.append(tmp)
     db.session.commit()
-    return redirect(url_for('.login')) #display completed tasks after user tagged a task as completed
+    return redirect('/repo') #display completed tasks after user tagged a task as completed
 
 
 # @app.route('/community', methods=['GET', 'POST'])
