@@ -55,8 +55,8 @@ def library():
         books.remove(book)
     return render_template('library.html',title="Book Library",books=books)
 
-@app.route('/repo',methods=['GET','POST'])
-def repo():
+@app.route('/list',methods=['GET','POST'])
+def list():
     book_form = BookForm()
     if book_form.validate_on_submit():
         tmp = Book(title=book_form.title.data,description=book_form.description.data)
@@ -67,7 +67,7 @@ def repo():
             db.session.add(tmp)
             db.session.commit()
             flash("Successfully added a book to your list!")
-            return redirect('/repo')
+            return redirect('/list')
         else:
             flash("Book already exists!")
     password_form = ReaderForm()
@@ -76,11 +76,11 @@ def repo():
         rdr = Reader.query.filter_by(name=session['active_user']).first()
         rdr.password = password_form.password.data
         db.session.commit()
-        flash("Successfully changed password!")
-        return redirect('/repo')
+        flash("Your password is successfully changed!")
+        return redirect('/list')
     rdr = Reader.query.filter_by(name=session['active_user']).first()
     books = rdr.book
-    return render_template('repo.html',title="Personal repository",books=books,book_form=book_form,password_form=password_form)
+    return render_template('list.html',title="Personal book list",books=books,book_form=book_form,password_form=password_form)
 
 @app.route('/unfinish/<id>') #agent route for tagging tasks as completed
 def unfinish(id):
@@ -88,8 +88,8 @@ def unfinish(id):
     tmp = Book.query.get(id)
     rdr.book.remove(tmp)
     db.session.commit()
-    flash("Successfully deleted a book from your list!")
-    return redirect('/repo') #display completed tasks after user tagged a task as completed
+    flash("Successfully deleted from your list!")
+    return redirect('/list') #display completed tasks after user tagged a task as completed
 
 @app.route('/finish/<id>') #agent route for tagging tasks as completed
 def finish(id):
