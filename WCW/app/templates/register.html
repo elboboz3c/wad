@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+<style>
+.center {
+  text-align: center;
+  margin:auto;
+  max-width: 300px;
+}
+</style>
 
- <div class="container">
-    <br><h2>The portal</h2><br>
+ <div class="container center">
+    <br><br><h5>Input your details:</h5><br>
    <form action="" method="post" name="create">
      {{ form.hidden_tag() }} <!--Preventing CSRF -->
      <div class="form-group">
