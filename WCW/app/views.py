@@ -88,7 +88,8 @@ def finish(id):
     tmp = Book.query.get(id)
     rdr.book.append(tmp)
     db.session.commit()
-    return redirect('/repo') #display completed tasks after user tagged a task as completed
+    flash("Successfully added a book to your list!")
+    return redirect('/library') #display completed tasks after user tagged a task as completed
 
 @app.route('/logout')
 def logout():

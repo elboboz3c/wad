@@ -19,17 +19,25 @@
   </ul>
 </nav>
 <br><br>
-{% for book in books %}
 <div class="container">
+  {% if books %}
+  <h3>Books you might also be interested in</h3><br>
+  {% else %}
+  <h3>Oops.. why not delete some books from your list?</h3><br>
+  {% endif %}
+
+{% for book in books %}
+
 
   <div class="card">
-    <div class="card-header">{{book.title}}</div>
+    <div class="card-header"><b>{{book.title}}</b>    <i>   &nbsp  this book is also read by {{book.reader|length}} other users</i></div>
     <div class="card-body">{{book.description}}</div>
     <div class="card-footer">
       <a href="/finish/{{book.id}}" class="btn btn-outline-dark" role="button">Already read</a>
     </div>
   </div><br>
-</div>
+
 {% endfor %}
+</div>
 
 {% endblock %}

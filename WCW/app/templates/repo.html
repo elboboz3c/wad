@@ -19,20 +19,28 @@
   </ul>
 </nav>
 <br><br>
+<div class="container">
+  {% if books %}
+  <h2>Your personal book list</h2><br>
+  {% else %}
+  <h2>Oops.. why not add some books from the library?</h2><br>
+  {% endif %}
 {% for book in books %}
 
-<div class="container">
+
+
+
 
   <div class="card">
-    <div class="card-header">{{book.title}}</div>
+    <div class="card-header"><b>{{book.title}}</b>    <i>   &nbsp  this book is also read by {{book.reader|length}} other users</i></div>
     <div class="card-body">{{book.description}}</div>
     <div class="card-footer">
       <a href="/unfinish/{{book.id}}" class="btn btn-outline-dark" role="button">Delete from my book list</a>
     </div>
   </div><br>
-</div>
+
 {% endfor %}
-<div class="container">
+
 <br><h2>Add a book you've read</h2><br>
 <form action="" method="post" name="create">
   {{ book_form.hidden_tag() }} <!--Preventing CSRF -->
@@ -61,5 +69,6 @@
   </div>
   <p><input type="submit" class="btn btn-dark" value="Submit"></p>
 </form>
+<br><br><br><br>
 </div>
 {% endblock %}
